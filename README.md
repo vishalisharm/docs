@@ -1,119 +1,79 @@
-<br />
-<br />
 
-<p align="center">
-<img src="https://github.com/near/node-docs/raw/refs/heads/main/website/static/img/near_logo.svg" width="240">
-</p>
+## ASSIGNMENT 1
+## ADVANCE ALGORITHMS LAB
 
-<br />
-<br />
 
-## NEAR Protocol - scalable and usable blockchain
 
-[![Discord](https://img.shields.io/discord/490367152054992913.svg)](http://near.chat)
-[![CI](https://github.com/near/docs/actions/workflows/build-check.yml/badge.svg)](https://github.com/near/docs/actions/workflows/build-check.yml)
+### EXERCISE 1 
 
-This is the repository for the official documentation of NEAR Protocol, a user-friendly and carbon-neutral blockchain, built from the ground up to be performant, secure, and infinitely scalable.
+#### ASSUMPTIONS
+- Undirected Graph (bidirectional)
+- Duplicated edges are ignored when creating the edges list
+- Unweighted Graph
+- Used 1-based indexing (all the graphs vertices start from 1)
 
-## Quick start
+#### ALGORITHMS USED
 
-Check out the following links:
+1. Adjancey list: A 2d vector is maintained for the graph edges that stores two int values first one showing the
+   u vertex and the second one showing the v vertex
+2. Maximal Matching: An array is used to mantain the track of matched vertices to calculate the Maximal Matching.
+3. Maximal Independent Set: Created an array of vertices and marked all the values as false, if a particular vertices
+   is not false then include int the independent set and marked all the neighbours as true so that they can't be part of
+   the set.
 
-- Deployed, live documentation: https://docs.near.org
-- Example applications: https://github.com/near-examples
-- Community chat: https://near.chat
+#### Time Complexity
 
-## Contributing
+1. For Adjacency List: First for loop runs E times to store hte edges and each iteration takes an input and push_back that
+  input in the vector so that takes constant time and big oh(E) for the for loop so "O(E)" and then for printing the adjacency list
+  the for loop iterates V(vertices) time which is "O(V)" so for the adjancey list part total time complexity become "O(V+E)".
+2. For Maximal Matching: Here i initialize some attributes like matching etc for that constanct O(1) and then a for loop that iterates for
+   E times so "O(E)", an array of size V(vertices) is made so "O(V)" then another for loop for the matching edges which runs M times but M<E
+   so overall complexity of this part becomes "O(V+E)".
+3. For Maximal Independent Set: Created an array of size V so O(V) then a for loop which traverses all vertices O(V), a nested for loop that iterates edges, so
+   the final complexity of this part becomes "O(V+E)".
+4. Total Time Complexity for algorithm - O(V+E).
 
-NEAR uses [Docusaurus](https://docusaurus.io) for documentation. Please refer to their documentation for details on major structural contributions to the documentation.
+#### MY INPUT - OUTPUT
+![INPUT-OUTPUT](https://i.ibb.co/1tZsp9nF/Screenshot-2026-08-01-170918.png)
+![INPUT-OUTPUT](https://i.ibb.co/pvJ2phPH/Screenshot-2026-08-01-180056.png)
+### EXERCISE 2 
 
-For simple content changes you have 2 options:
+#### ASSUMPTIONS
 
-- [Submit an issue](https://github.com/near/docs/issues)
-- [Submit a pull request](https://github.com/near/docs/pulls) *(we prefer PRs of course)*
+- Undirected Graph (bidirectional)
+- Duplicated edges are ignored when creating the edges list
+- Unweighted Graph
+- Used 1-based indexing (all the graphs vertices start from 1)
 
-### The instant PR
+#### ALGORITHM USED
 
-This is the fastest way to submit content changes directly from the page where you notice a mistake.
+1. Adjancey list: A 2d vector is maintained for the graph edges that stores two int values first one showing the
+   u vertex and the second one showing the v vertex
+2. Line Graphh: After considering all the edges of graph as vertices the line graph is completed and then edge matching
+   helps in finding the edges.
+3. Maximal Independent Set: Created a boolean array to traverse every vertex of the line graph, adding it to the independent set and blocking its neighbour
+   vertices.
+4. The Maximal Independent set of the Line graph is the Maximal Matching of the original graph.
 
-1. Open any page in the docs on https://docs.near.org
-2. Click the `[ Edit ]` button at the top right hand side of _every_ content page
-3. Make your edits to the document that opens in GitHub by clicking the ✎ (pencil) icon
-4. Submit a PR with your changes and comments for context
 
-### The typical PR
+#### Time Complexity
 
-This is the standard fork-branch-commit workflow for submitting pull requests to open-source repositories:
+- Taking input for edges: The for loop iterates E(edges) times and another operation takes constant time so O(E).
+  Another loop iterates for V times for construction of edge list so O(V), overall for this part O(V+E).
+- Vertices of line graph: Taking the edges of original graph as vertices for the line graph i run a for loop that
+  iterates E times so O(E).
+- Edges of line graph: There is a nested loop, the outer loop executes E times and the inner loop exutes E-i-1 times
+  which is close to E so the time complexity become O(E2)​ and another loop runs for El times which is the edges of
+  line graph so time complexity for this part becomes O(Esquare + El).
+- Adjacency List: A for loop executed for edges.size() time which is E so O(E).
+- Maximal Independent Set: For initialization of the array it take O(E), outer loop iterates E times and the inner loop
+  iterates E X EL times so O(Ecube) as EL = O(Esquare).
+- Total time complexity of the algorithm: O(E cube).
 
-1. Fork this repo to your own GitHub account (or just clone it directly if you are currently a member of NEAR)
+  #### MY INPUT-OUTPUT
+  ![INPUT-OUTPUT](https://i.ibb.co/jvWDdN44/Screenshot-2026-08-01-175148.png)
+  ![INPUT-OUTPUT](https://i.ibb.co/TNg1K74/Screenshot-2026-08-01-180258.png)
+  ![INPUT-OUTPUT](https://i.ibb.co/VpLzPznG/Screenshot-2026-08-01-180305.png)
 
-2. Open your editor to the _top level repo folder_ to view the directory structure as seen below
-
-3. Move into the `/website` folder where you will run the following commands:
-
-   - Make sure all the dependencies for the website are installed:
-
-     ```sh
-     # Install dependencies
-     yarn
-     ```
-
-   - Run the local docs development server
-
-      ```sh
-      # Start the site
-      yarn start
-      ```
-
-      _Expected Output_
-
-      ```sh
-      # Website with live reload is started
-      LiveReload server started on port 35729
-      Docusaurus server started on port 3000
-      ```
-
-      The website for docs will open your browser locally to port `3000`
-
-4. Make changes to the docs
-
-5. Observe those changes reflected in the local docs
-
-6. Submit a pull request with your changes - **[Please check for broken links before opening PR 🙏](#check-for-broken-links)**
-
-## Directory Structure
-
-Your project file structure should look something like this with a few key files and folders highlighted
-
-```
-├── CODE_OF_CONDUCT.md
-├── CONTRIBUTING.md
-├── LICENSE-APACHE.txt
-├── LICENSE-MIT.txt
-├── README.md             <-- the document you are reading right now
-├── docs                  <-- all the content for the site is in this folder as markdown files
-└── website
-    ├── build
-    ├── core
-    ├── i18n
-    ├── package.json
-    ├── pages
-    ├── sidebars.js     <-- rarely used for changing left-hand-side page navigation
-    ├── docusaurus.config.js     <-- rarely used for general site configuration (including header links)
-    ├── static
-    └── test-links.sh     <-- always used to test links before submitting changes
-```
-
-## Found a broken link?
-
-For broken links internal to the docs, please submit an issue or PR request as per above.
-
-If you found a broken link from a Google search, please request to remove it from their index here: https://www.google.com/webmasters/tools/removals
-
-## Check for broken links
-
-Before opening a pull request, please check for broken links by navigating to `./website` directory and run:
-
-```bash
-yarn full-test
-```
+ 
+     
