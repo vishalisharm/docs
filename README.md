@@ -1,10 +1,8 @@
-
 # ASSIGNMENT 1
 ## ADVANCE COMPUTER ARCHITECTURE
 
-
-### NAME: VISHALI
-### ROLL NO: 26CS06018 
+**Name:** Vishali  
+**Roll No:** 26CS06018
 
 
 
